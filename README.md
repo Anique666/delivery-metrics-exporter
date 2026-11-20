@@ -960,14 +960,14 @@ and the archived copy is downloadable from the build page at
 Actual output (run on the host, outside Jenkins):
 
 ```text
-Unpacking evidence/deployment-artifact.zip into /tmp/tmp.Cm3QY4oofx
+Unpacking evidence/deployment-artifact.zip into /tmp/tmp.vt8CuitEJt
 Creating a fresh virtual environment inside the unpacked package
 Installing runtime requirements
 Running the packaged exporter
 Service      : checkout-api
 Window (days): 30
 Metrics      : 4
-Report       : /tmp/tmp.Cm3QY4oofx/deployment/output/metrics-report.json
+Report       : /tmp/tmp.vt8CuitEJt/deployment/output/metrics-report.json
 ...
 SUCCESS: the deployment artifact runs independently.
 ```
