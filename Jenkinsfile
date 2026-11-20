@@ -93,6 +93,8 @@ pipeline {
                     echo "=========================================================="
                     echo "Stage 2: Dependency Installation / Build"
                     echo "=========================================================="
+                    echo "Recreating the virtual environment from scratch"
+                    rm -rf "$VENV_DIR"
                     python3 -m venv "$VENV_DIR"
                     # shellcheck disable=SC1091
                     . "$VENV_DIR/bin/activate"
