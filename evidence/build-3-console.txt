@@ -1,0 +1,305 @@
+Started by user admin
+Obtained Jenkinsfile from git https://github.com/Anique666/delivery-metrics-exporter.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/delivery-metrics-exporter
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/delivery-metrics-exporter/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Anique666/delivery-metrics-exporter.git # timeout=10
+Fetching upstream changes from https://github.com/Anique666/delivery-metrics-exporter.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Anique666/delivery-metrics-exporter.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 82a9a97eaeee47015a54b601f9cb5d429d72ee76 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 82a9a97eaeee47015a54b601f9cb5d429d72ee76 # timeout=10
+Commit message: "Fix Groovy escape in ZIP content check"
+ > git rev-list --no-walk 82a9a97eaeee47015a54b601f9cb5d429d72ee76 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] timeout
+[2026-11-20T07:40:37.674Z] Timeout set to expire in 20 min
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Source Checkout)
+[Pipeline] sh
+[2026-11-20T07:40:37.972Z] + set -eu
+[2026-11-20T07:40:37.973Z] + echo ==========================================================
+[2026-11-20T07:40:37.973Z] ==========================================================
+[2026-11-20T07:40:37.973Z] + echo Stage 1: Source Checkout
+[2026-11-20T07:40:37.973Z] Stage 1: Source Checkout
+[2026-11-20T07:40:37.973Z] + echo ==========================================================
+[2026-11-20T07:40:37.973Z] ==========================================================
+[2026-11-20T07:40:37.973Z] + git config --get remote.origin.url
+[2026-11-20T07:40:37.973Z] + echo Repository URL : https://github.com/Anique666/delivery-metrics-exporter.git
+[2026-11-20T07:40:37.973Z] Repository URL : https://github.com/Anique666/delivery-metrics-exporter.git
+[2026-11-20T07:40:37.973Z] + git rev-parse --abbrev-ref HEAD
+[2026-11-20T07:40:37.973Z] + echo Branch         : HEAD
+[2026-11-20T07:40:37.973Z] Branch         : HEAD
+[2026-11-20T07:40:37.973Z] + git rev-parse HEAD
+[2026-11-20T07:40:37.973Z] + echo Commit         : 82a9a97eaeee47015a54b601f9cb5d429d72ee76
+[2026-11-20T07:40:37.973Z] Commit         : 82a9a97eaeee47015a54b601f9cb5d429d72ee76
+[2026-11-20T07:40:37.973Z] + git rev-parse --short HEAD
+[2026-11-20T07:40:37.973Z] + echo Short commit   : 82a9a97
+[2026-11-20T07:40:37.973Z] Short commit   : 82a9a97
+[2026-11-20T07:40:37.973Z] + git log -1 --pretty=%s
+[2026-11-20T07:40:37.973Z] + echo Commit message : Fix Groovy escape in ZIP content check
+[2026-11-20T07:40:37.973Z] Commit message : Fix Groovy escape in ZIP content check
+[2026-11-20T07:40:37.973Z] + git log -1 --pretty=%an <%ae>
+[2026-11-20T07:40:37.973Z] + echo Commit author  : Anique666 <anishkasetty@gmail.com>
+[2026-11-20T07:40:37.973Z] Commit author  : Anique666 <anishkasetty@gmail.com>
+[2026-11-20T07:40:37.973Z] + git log -1 --pretty=%ci
+[2026-11-20T07:40:37.973Z] + echo Commit date    : 2026-11-20 13:03:57 +0530
+[2026-11-20T07:40:37.973Z] Commit date    : 2026-11-20 13:03:57 +0530
+[2026-11-20T07:40:37.973Z] + pwd
+[2026-11-20T07:40:37.973Z] + echo Workspace      : /var/jenkins_home/workspace/delivery-metrics-exporter
+[2026-11-20T07:40:37.973Z] Workspace      : /var/jenkins_home/workspace/delivery-metrics-exporter
+[2026-11-20T07:40:37.973Z] + echo ----------------------------------------------------------
+[2026-11-20T07:40:37.973Z] ----------------------------------------------------------
+[2026-11-20T07:40:37.973Z] + echo Verifying expected project files:
+[2026-11-20T07:40:37.973Z] Verifying expected project files:
+[2026-11-20T07:40:37.973Z] + [ ! -f Jenkinsfile ]
+[2026-11-20T07:40:37.973Z] + echo   OK  Jenkinsfile
+[2026-11-20T07:40:37.973Z]   OK  Jenkinsfile
+[2026-11-20T07:40:37.973Z] + [ ! -f requirements.txt ]
+[2026-11-20T07:40:37.973Z] + echo   OK  requirements.txt
+[2026-11-20T07:40:37.973Z]   OK  requirements.txt
+[2026-11-20T07:40:37.973Z] + [ ! -f requirements-dev.txt ]
+[2026-11-20T07:40:37.973Z] + echo   OK  requirements-dev.txt
+[2026-11-20T07:40:37.973Z]   OK  requirements-dev.txt
+[2026-11-20T07:40:37.973Z] + [ ! -f exporter/__init__.py ]
+[2026-11-20T07:40:37.973Z] + echo   OK  exporter/__init__.py
+[2026-11-20T07:40:37.973Z]   OK  exporter/__init__.py
+[2026-11-20T07:40:37.973Z] + [ ! -f exporter/metrics.py ]
+[2026-11-20T07:40:37.973Z] + echo   OK  exporter/metrics.py
+[2026-11-20T07:40:37.973Z]   OK  exporter/metrics.py
+[2026-11-20T07:40:37.973Z] + [ ! -f exporter/main.py ]
+[2026-11-20T07:40:37.973Z] + echo   OK  exporter/main.py
+[2026-11-20T07:40:37.973Z]   OK  exporter/main.py
+[2026-11-20T07:40:37.973Z] + [ ! -f config/metrics.json ]
+[2026-11-20T07:40:37.973Z] + echo   OK  config/metrics.json
+[2026-11-20T07:40:37.973Z]   OK  config/metrics.json
+[2026-11-20T07:40:37.973Z] + [ ! -f tests/test_metrics.py ]
+[2026-11-20T07:40:37.973Z] + echo   OK  tests/test_metrics.py
+[2026-11-20T07:40:37.973Z]   OK  tests/test_metrics.py
+[2026-11-20T07:40:37.973Z] + [ ! -f README.md ]
+[2026-11-20T07:40:37.973Z] + echo   OK  README.md
+[2026-11-20T07:40:37.973Z]   OK  README.md
+[2026-11-20T07:40:37.973Z] + echo All expected project files are present.
+[2026-11-20T07:40:37.973Z] All expected project files are present.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Dependency Installation / Build)
+[Pipeline] sh
+[2026-11-20T07:40:38.284Z] + set -eu
+[2026-11-20T07:40:38.285Z] + echo ==========================================================
+[2026-11-20T07:40:38.285Z] ==========================================================
+[2026-11-20T07:40:38.285Z] + echo Stage 2: Dependency Installation / Build
+[2026-11-20T07:40:38.285Z] Stage 2: Dependency Installation / Build
+[2026-11-20T07:40:38.285Z] + echo ==========================================================
+[2026-11-20T07:40:38.285Z] ==========================================================
+[2026-11-20T07:40:38.285Z] + python3 -m venv .venv
+[2026-11-20T07:40:39.196Z] + . .venv/bin/activate
+[2026-11-20T07:40:39.196Z] + deactivate nondestructive
+[2026-11-20T07:40:39.196Z] + [ -n  ]
+[2026-11-20T07:40:39.196Z] + [ -n  ]
+[2026-11-20T07:40:39.196Z] + hash -r
+[2026-11-20T07:40:39.196Z] + [ -n  ]
+[2026-11-20T07:40:39.196Z] + unset VIRTUAL_ENV
+[2026-11-20T07:40:39.196Z] + unset VIRTUAL_ENV_PROMPT
+[2026-11-20T07:40:39.196Z] + [ ! nondestructive = nondestructive ]
+[2026-11-20T07:40:39.196Z] + uname
+[2026-11-20T07:40:39.196Z] + export VIRTUAL_ENV=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv
+[2026-11-20T07:40:39.196Z] + _OLD_VIRTUAL_PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:40:39.196Z] + PATH=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:40:39.196Z] + export PATH
+[2026-11-20T07:40:39.196Z] + VIRTUAL_ENV_PROMPT=.venv
+[2026-11-20T07:40:39.196Z] + export VIRTUAL_ENV_PROMPT
+[2026-11-20T07:40:39.196Z] + [ -n  ]
+[2026-11-20T07:40:39.196Z] + [ -z  ]
+[2026-11-20T07:40:39.196Z] + _OLD_VIRTUAL_PS1=$ 
+[2026-11-20T07:40:39.196Z] + PS1=(.venv) $ 
+[2026-11-20T07:40:39.196Z] + export PS1
+[2026-11-20T07:40:39.196Z] + hash -r
+[2026-11-20T07:40:39.196Z] + command -v python
+[2026-11-20T07:40:39.196Z] + echo Python executable : /var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin/python
+[2026-11-20T07:40:39.196Z] Python executable : /var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin/python
+[2026-11-20T07:40:39.196Z] + python --version
+[2026-11-20T07:40:39.196Z] Python 3.13.5
+[2026-11-20T07:40:39.196Z] + python -m pip install --upgrade pip
+[2026-11-20T07:40:39.196Z] Requirement already satisfied: pip in ./.venv/lib/python3.13/site-packages (26.3)
+[2026-11-20T07:40:39.196Z] + echo ----------------------------------------------------------
+[2026-11-20T07:40:39.196Z] ----------------------------------------------------------
+[2026-11-20T07:40:39.196Z] + echo Installing runtime dependencies (requirements.txt):
+[2026-11-20T07:40:39.196Z] Installing runtime dependencies (requirements.txt):
+[2026-11-20T07:40:39.196Z] + python -m pip install -r requirements.txt
+[2026-11-20T07:40:39.447Z] + echo ----------------------------------------------------------
+[2026-11-20T07:40:39.447Z] ----------------------------------------------------------
+[2026-11-20T07:40:39.447Z] + echo Installing test/CI dependencies (requirements-dev.txt):
+[2026-11-20T07:40:39.447Z] Installing test/CI dependencies (requirements-dev.txt):
+[2026-11-20T07:40:39.447Z] + python -m pip install -r requirements-dev.txt
+[2026-11-20T07:40:39.697Z] Requirement already satisfied: pytest==8.3.4 in ./.venv/lib/python3.13/site-packages (from -r requirements-dev.txt (line 3)) (8.3.4)
+[2026-11-20T07:40:39.697Z] Requirement already satisfied: iniconfig in ./.venv/lib/python3.13/site-packages (from pytest==8.3.4->-r requirements-dev.txt (line 3)) (2.3.1)
+[2026-11-20T07:40:39.697Z] Requirement already satisfied: packaging in ./.venv/lib/python3.13/site-packages (from pytest==8.3.4->-r requirements-dev.txt (line 3)) (26.3)
+[2026-11-20T07:40:39.697Z] Requirement already satisfied: pluggy<2,>=1.5 in ./.venv/lib/python3.13/site-packages (from pytest==8.3.4->-r requirements-dev.txt (line 3)) (1.7.0)
+[2026-11-20T07:40:39.697Z] + echo ----------------------------------------------------------
+[2026-11-20T07:40:39.697Z] ----------------------------------------------------------
+[2026-11-20T07:40:39.697Z] + echo Installed packages:
+[2026-11-20T07:40:39.697Z] Installed packages:
+[2026-11-20T07:40:39.697Z] + python -m pip list
+[2026-11-20T07:40:39.697Z] Package   Version
+[2026-11-20T07:40:39.697Z] --------- -------
+[2026-11-20T07:40:39.697Z] iniconfig 2.3.1
+[2026-11-20T07:40:39.697Z] packaging 26.3
+[2026-11-20T07:40:39.697Z] pip       26.3
+[2026-11-20T07:40:39.697Z] pluggy    1.7.0
+[2026-11-20T07:40:39.697Z] pytest    8.3.4
+[2026-11-20T07:40:39.697Z] + echo ----------------------------------------------------------
+[2026-11-20T07:40:39.697Z] ----------------------------------------------------------
+[2026-11-20T07:40:39.697Z] + echo Build check: byte-compiling the package
+[2026-11-20T07:40:39.697Z] Build check: byte-compiling the package
+[2026-11-20T07:40:39.697Z] + python -m compileall -q exporter tests
+[2026-11-20T07:40:39.697Z] + echo Byte-compilation succeeded.
+[2026-11-20T07:40:39.697Z] Byte-compilation succeeded.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Automated Test / Validation)
+[Pipeline] sh
+[2026-11-20T07:40:40.002Z] + set -eu
+[2026-11-20T07:40:40.002Z] + echo ==========================================================
+[2026-11-20T07:40:40.003Z] ==========================================================
+[2026-11-20T07:40:40.003Z] + echo Stage 3: Automated Test / Validation
+[2026-11-20T07:40:40.003Z] Stage 3: Automated Test / Validation
+[2026-11-20T07:40:40.003Z] + echo ==========================================================
+[2026-11-20T07:40:40.003Z] ==========================================================
+[2026-11-20T07:40:40.003Z] + . .venv/bin/activate
+[2026-11-20T07:40:40.003Z] + deactivate nondestructive
+[2026-11-20T07:40:40.003Z] + [ -n  ]
+[2026-11-20T07:40:40.003Z] + [ -n  ]
+[2026-11-20T07:40:40.003Z] + hash -r
+[2026-11-20T07:40:40.003Z] + [ -n  ]
+[2026-11-20T07:40:40.003Z] + unset VIRTUAL_ENV
+[2026-11-20T07:40:40.003Z] + unset VIRTUAL_ENV_PROMPT
+[2026-11-20T07:40:40.003Z] + [ ! nondestructive = nondestructive ]
+[2026-11-20T07:40:40.003Z] + uname
+[2026-11-20T07:40:40.003Z] + export VIRTUAL_ENV=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv
+[2026-11-20T07:40:40.003Z] + _OLD_VIRTUAL_PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:40:40.003Z] + PATH=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:40:40.003Z] + export PATH
+[2026-11-20T07:40:40.003Z] + VIRTUAL_ENV_PROMPT=.venv
+[2026-11-20T07:40:40.003Z] + export VIRTUAL_ENV_PROMPT
+[2026-11-20T07:40:40.003Z] + [ -n  ]
+[2026-11-20T07:40:40.003Z] + [ -z  ]
+[2026-11-20T07:40:40.003Z] + _OLD_VIRTUAL_PS1=$ 
+[2026-11-20T07:40:40.003Z] + PS1=(.venv) $ 
+[2026-11-20T07:40:40.003Z] + export PS1
+[2026-11-20T07:40:40.003Z] + hash -r
+[2026-11-20T07:40:40.003Z] + echo DEMO_FORCE_TEST_FAILURE=true
+[2026-11-20T07:40:40.003Z] DEMO_FORCE_TEST_FAILURE=true
+[2026-11-20T07:40:40.003Z] + mkdir -p reports
+[2026-11-20T07:40:40.003Z] + python -m pytest -v tests --junitxml=reports/junit-results.xml
+[2026-11-20T07:40:40.003Z] ============================= test session starts ==============================
+[2026-11-20T07:40:40.003Z] platform linux -- Python 3.13.5, pytest-8.3.4, pluggy-1.7.0 -- /var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin/python
+[2026-11-20T07:40:40.003Z] cachedir: .pytest_cache
+[2026-11-20T07:40:40.003Z] rootdir: /var/jenkins_home/workspace/delivery-metrics-exporter
+[2026-11-20T07:40:40.003Z] collecting ... collected 26 items
+[2026-11-20T07:40:40.003Z] 
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestConfiguration::test_config_without_metrics_section_raises PASSED [  3%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestConfiguration::test_invalid_json_raises_metric_error PASSED [  7%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestConfiguration::test_missing_config_file_raises_metric_error PASSED [ 11%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestConfiguration::test_shipped_config_file_loads PASSED [ 15%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_missing_metric_is_reported PASSED [ 19%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_nan_is_rejected PASSED [ 23%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_negative_value_is_rejected PASSED [ 26%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_non_mapping_metrics_are_rejected PASSED [ 30%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_non_numeric_values_are_rejected PASSED [ 34%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_percentage_above_100_is_rejected PASSED [ 38%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_unknown_metric_is_rejected PASSED [ 42%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_unknown_metric_is_reported PASSED [ 46%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_valid_metric_returns_float PASSED [ 50%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestMetricValidation::test_validate_metrics_returns_all_required_keys PASSED [ 53%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestReportGeneration::test_invalid_metric_value_prevents_report PASSED [ 57%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestReportGeneration::test_invalid_window_days_is_rejected PASSED [ 61%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestReportGeneration::test_report_is_deterministic_for_fixed_timestamp PASSED [ 65%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestReportGeneration::test_report_structure_is_predictable PASSED [ 69%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestReportGeneration::test_report_values_match_input PASSED [ 73%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestJsonSerialisation::test_json_is_pretty_printed PASSED [ 76%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestJsonSerialisation::test_json_round_trip PASSED [ 80%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestJsonSerialisation::test_write_report_creates_directory_and_file PASSED [ 84%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestJsonSerialisation::test_write_report_rejects_non_json_filename PASSED [ 88%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestCommandLine::test_cli_generates_report PASSED [ 92%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestCommandLine::test_cli_returns_1_on_bad_config PASSED [ 96%]
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py::TestControlledFailureDemo::test_controlled_failure_flag_is_respected FAILED [100%]
+[2026-11-20T07:40:40.003Z] 
+[2026-11-20T07:40:40.003Z] =================================== FAILURES ===================================
+[2026-11-20T07:40:40.003Z] _____ TestControlledFailureDemo.test_controlled_failure_flag_is_respected ______
+[2026-11-20T07:40:40.003Z] 
+[2026-11-20T07:40:40.003Z] self = <tests.test_metrics.TestControlledFailureDemo testMethod=test_controlled_failure_flag_is_respected>
+[2026-11-20T07:40:40.003Z] 
+[2026-11-20T07:40:40.003Z]     def test_controlled_failure_flag_is_respected(self):
+[2026-11-20T07:40:40.003Z]         flag = os.environ.get("DEMO_FORCE_TEST_FAILURE", "").strip().lower()
+[2026-11-20T07:40:40.003Z]         if flag in {"1", "true", "yes", "on"}:
+[2026-11-20T07:40:40.003Z] >           self.fail(
+[2026-11-20T07:40:40.003Z]                 "CONTROLLED FAILURE: DEMO_FORCE_TEST_FAILURE="
+[2026-11-20T07:40:40.003Z]                 f"{flag!r} is enabled. This failure is intentional and exists "
+[2026-11-20T07:40:40.003Z]                 "only to demonstrate Jenkins test-failure detection."
+[2026-11-20T07:40:40.003Z]             )
+[2026-11-20T07:40:40.003Z] E           AssertionError: CONTROLLED FAILURE: DEMO_FORCE_TEST_FAILURE='true' is enabled. This failure is intentional and exists only to demonstrate Jenkins test-failure detection.
+[2026-11-20T07:40:40.003Z] 
+[2026-11-20T07:40:40.003Z] tests/test_metrics.py:231: AssertionError
+[2026-11-20T07:40:40.003Z] - generated xml file: /var/jenkins_home/workspace/delivery-metrics-exporter/reports/junit-results.xml -
+[2026-11-20T07:40:40.003Z] =========================== short test summary info ============================
+[2026-11-20T07:40:40.003Z] FAILED tests/test_metrics.py::TestControlledFailureDemo::test_controlled_failure_flag_is_respected - AssertionError: CONTROLLED FAILURE: DEMO_FORCE_TEST_FAILURE='true' is enabled. This failure is intentional and exists only to demonstrate Jenkins test-failure detection.
+[2026-11-20T07:40:40.003Z] ========================= 1 failed, 25 passed in 0.04s =========================
+Post stage
+[Pipeline] junit
+[2026-11-20T07:40:40.064Z] Recording test results
+[2026-11-20T07:40:40.070Z] [Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deployment Packaging)
+Stage "Deployment Packaging" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+[2026-11-20T07:40:40.228Z] Final build status: FAILURE (build #3)
+[Pipeline] archiveArtifacts
+[2026-11-20T07:40:40.236Z] Archiving artifacts
+[2026-11-20T07:40:40.237Z] Recording fingerprints
+[Pipeline] echo
+[2026-11-20T07:40:40.257Z] BUILD FAILURE: the pipeline stopped at the failing stage. Check the stage console output above and the archived JUnit report.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE

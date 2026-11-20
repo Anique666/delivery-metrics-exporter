@@ -63,6 +63,9 @@ pipeline {
                     echo "Commit date    : $(git log -1 --pretty=%ci)"
                     echo "Workspace      : $(pwd)"
                     echo "----------------------------------------------------------"
+                    echo "Removing build outputs from previous runs (stale-artifact protection)"
+                    rm -rf "$DEPLOY_DIR" "$ARTIFACT_NAME" "$REPORT_DIR"
+                    echo "----------------------------------------------------------"
                     echo "Verifying expected project files:"
                     for file in Jenkinsfile requirements.txt requirements-dev.txt exporter/__init__.py exporter/metrics.py exporter/main.py config/metrics.json tests/test_metrics.py README.md; do
                         if [ ! -f "$file" ]; then

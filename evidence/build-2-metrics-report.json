@@ -1,0 +1,32 @@
+{
+  "service": "checkout-api",
+  "window_days": 30,
+  "generated_at": "2026-11-20T07:34:31+00:00",
+  "metric_count": 4,
+  "metrics": {
+    "deployment_frequency_per_day": {
+      "label": "Deployment Frequency",
+      "value": 3.4,
+      "unit": "deployments/day",
+      "description": "How often the service is deployed to production per day."
+    },
+    "lead_time_hours": {
+      "label": "Lead Time for Changes",
+      "value": 18.5,
+      "unit": "hours",
+      "description": "Time from commit to running in production."
+    },
+    "change_failure_rate_percent": {
+      "label": "Change Failure Rate",
+      "value": 8.0,
+      "unit": "%",
+      "description": "Percentage of deployments that cause a degradation."
+    },
+    "mttr_hours": {
+      "label": "Mean Time to Recovery (MTTR)",
+      "value": 2.25,
+      "unit": "hours",
+      "description": "Average time to restore service after an incident."
+    }
+  }
+}
