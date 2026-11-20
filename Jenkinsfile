@@ -208,7 +208,7 @@ pipeline {
                     echo "Creating ZIP archive: $ARTIFACT_NAME"
                     zip -qr "$ARTIFACT_NAME" "$DEPLOY_DIR"
                     unzip -l "$ARTIFACT_NAME"
-                    if unzip -Z1 "$ARTIFACT_NAME" | grep -Eq '(__pycache__|\.venv/|/tests/|\.pytest_cache)'; then
+                    if unzip -Z1 "$ARTIFACT_NAME" | grep -Eq '(__pycache__|[.]venv/|/tests/|[.]pytest_cache)'; then
                         echo "ERROR: the ZIP archive contains build/test artefacts that must not be shipped"
                         exit 1
                     fi
