@@ -1,7 +1,7 @@
 {
   "service": "checkout-api",
   "window_days": 30,
-  "generated_at": "2026-11-20T07:34:31+00:00",
+  "generated_at": "2026-11-20T07:42:34+00:00",
   "metric_count": 4,
   "metrics": {
     "deployment_frequency_per_day": {
