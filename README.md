@@ -785,13 +785,21 @@ curl -s -u admin:"$JENKINS_ADMIN_PASSWORD" \
 > Jenkins version. Use `buildWithParameters` with an explicit parameter (as
 > above) or POST with no body at all.
 
-### From the demo scripts
+### From the repository helper script
+
+`scripts/trigger-build.sh` handles the CSRF crumb and cookie jar correctly:
 
 ```bash
-python3 /tmp/opencode/jenkins_run.py delivery-metrics-exporter evidence/build-6-console.txt DEMO_FORCE_TEST_FAILURE=false
+export JENKINS_ADMIN_PASSWORD='<your-jenkins-admin-password>'
+
+./scripts/trigger-build.sh false   # normal build
+./scripts/trigger-build.sh true    # controlled-failure build
 ```
 
-(that helper is a local evidence-capture script, not part of the repository).
+It prints `Triggered … (HTTP 201)` on success and exits non-zero on any
+rejection. A crumb is bound to the web session that requested it, so it must
+always be fetched and used with the same cookie jar — reusing an old `$CRUMB`
+produces `403 No valid crumb was included in the request`.
 
 ## 17. Expected Successful Build Output
 
