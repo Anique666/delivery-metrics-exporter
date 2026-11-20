@@ -975,7 +975,7 @@ SUCCESS: the deployment artifact runs independently.
 ### Manual check (exactly as in the examination brief)
 
 ```bash
-unzip deployment-artifact.zip -d /tmp/dme
+unzip evidence/deployment-artifact.zip -d /tmp/dme
 cd /tmp/dme/deployment
 python3 -m venv .venv
 source .venv/bin/activate
