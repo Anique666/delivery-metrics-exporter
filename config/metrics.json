@@ -1,0 +1,10 @@
+{
+  "service": "checkout-api",
+  "window_days": 30,
+  "metrics": {
+    "deployment_frequency_per_day": 3.4,
+    "lead_time_hours": 18.5,
+    "change_failure_rate_percent": 8.0,
+    "mttr_hours": 2.25
+  }
+}

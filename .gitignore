@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Test / build output
+reports/
+output/
+deployment/
+deployment-artifact.zip
+
+# Local evidence copies (console logs, archived artifact) are committed on purpose
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store

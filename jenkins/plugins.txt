@@ -1,0 +1,9 @@
+workflow-aggregator:latest
+git:latest
+github:latest
+junit:latest
+pipeline-stage-view:latest
+credentials-binding:latest
+timestamper:latest
+ws-cleanup:latest
+antisamy-markup-formatter:latest

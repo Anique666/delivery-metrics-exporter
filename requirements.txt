@@ -1,0 +1,7 @@
+# Runtime dependencies for delivery-metrics-exporter.
+#
+# The exporter is implemented with the Python standard library only
+# (json, argparse, pathlib, datetime), so there are no third-party
+# runtime packages to install. Test/CI tooling lives in
+# requirements-dev.txt instead, which keeps the packaged deployment
+# artifact dependency-free.
