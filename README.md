@@ -11,7 +11,7 @@ automated tests, and packages a runnable deployment artifact.
 | Jenkins job | `delivery-metrics-exporter` — <http://localhost:8080/job/delivery-metrics-exporter/> |
 | Jenkins | 2.580.2 LTS (JDK 21 container), built-in node, 2 executors |
 | Pipeline definition | **Pipeline script from SCM** → Git → `Jenkinsfile` |
-| Latest verified build | `#6` SUCCESS on the documented commit; `#4` FAILURE (controlled failure run) |
+| Latest verified build | `#7` SUCCESS (final verification, clean virtual environment); `#4` FAILURE (controlled failure run) |
 
 > **Actual results vs. illustrative examples.**
 > Every build number, timestamp, test count, duration and console excerpt in
@@ -549,6 +549,8 @@ stage('Dependency Installation / Build') {
     steps {
         sh '''
             set -eu
+            echo "Recreating the virtual environment from scratch"
+            rm -rf "$VENV_DIR"
             python3 -m venv "$VENV_DIR"
             . "$VENV_DIR/bin/activate"
             python -m pip install --upgrade pip
@@ -561,6 +563,10 @@ stage('Dependency Installation / Build') {
 }
 ```
 
+- Deletes and recreates the virtual environment on **every** build, so the
+  pinned dependency set is installed from scratch. Reusing a workspace venv
+  would let pip print “Requirement already satisfied” and could hide
+  dependency drift.
 - Creates an isolated virtual environment in the workspace, so the build never
   pollutes the system Python and is repeatable.
 - Installs runtime and test requirements. `pip install` returns non-zero on
@@ -789,7 +795,7 @@ python3 /tmp/opencode/jenkins_run.py delivery-metrics-exporter evidence/build-6-
 
 ## 17. Expected Successful Build Output
 
-### Actual captured console (build `#5`, abridged)
+### Actual captured console (build `#7`, abridged)
 
 ```text
 Started by user admin
@@ -798,22 +804,26 @@ Obtained Jenkinsfile from git https://github.com/Anique666/delivery-metrics-expo
 Running on Jenkins in /var/jenkins_home/workspace/delivery-metrics-exporter
 ...
 [Pipeline] { (Declarative: Checkout SCM)
-Checking out Revision 0a8b8496e479931d09bc9db8c59d79f48060e506 (refs/remotes/origin/main)
-Commit message: "Remove stale build outputs before each run"
+Checking out Revision 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb (refs/remotes/origin/main)
+Commit message: "Recreate the virtual environment on every build"
 ...
 Stage 1: Source Checkout
 Repository URL : https://github.com/Anique666/delivery-metrics-exporter.git
-Commit         : 0a8b8496e479931d09bc9db8c59d79f48060e506
-Commit message : Remove stale build outputs before each run
+Branch         : origin/main (working tree state: HEAD)
+Remote refs    : origin/main
+Commit         : 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb
+Commit message : Recreate the virtual environment on every build
 ...
 Stage 2: Dependency Installation / Build
+Recreating the virtual environment from scratch
 Python 3.13.5
+Successfully installed pip-26.3
 Successfully installed iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pytest-8.3.4
 ...
 Stage 3: Automated Test / Validation
 DEMO_FORCE_TEST_FAILURE=false
 tests/test_metrics.py::TestControlledFailureDemo::test_controlled_failure_flag_is_respected PASSED [100%]
-============================== 26 passed in 0.03s ==============================
+============================== 26 passed in 0.04s ==============================
 ...
 Stage 4: Deployment Packaging
   OK  deployment/exporter/__init__.py
@@ -825,26 +835,27 @@ Stage 4: Deployment Packaging
   OK  deployment/BUILD-INFO.txt
 Packaged report validated: service=checkout-api metrics=4
 Creating ZIP archive: deployment-artifact.zip
--rw-r--r--. 1 jenkins jenkins 7.5K Nov 20 07:42 deployment-artifact.zip
+-rw-r--r--. 1 jenkins jenkins 28K Nov 20 13:21 deployment-artifact.zip
 Deployment packaging complete.
-Final build status: SUCCESS (build #5)
+Final build status: SUCCESS (build #7)
 BUILD SUCCESS: all four stages passed. The exporter was validated and deployment-artifact.zip was produced.
 Finished: SUCCESS
 ```
 
-### Stage table (actual, build `#5`)
+### Stage table (actual, build `#7`)
 
 | Stage | Status | Duration |
 |---|---|---|
-| Declarative: Checkout SCM | SUCCESS | 1.6 s |
+| Declarative: Checkout SCM | SUCCESS | 1.9 s |
 | Source Checkout | SUCCESS | 0.3 s |
-| Dependency Installation / Build | SUCCESS | 1.6 s |
+| Dependency Installation / Build | SUCCESS | 5.5 s |
 | Automated Test / Validation | SUCCESS | 0.3 s |
 | Deployment Packaging | SUCCESS | 0.3 s |
 | Declarative: Post Actions | SUCCESS | 0.1 s |
 
-Total build time: **6.0 s** (build `#2`, the first successful run, took 17.6 s
-because pip downloaded pytest for the first time).
+Total build time: **13.1 s** (build `#2`, the first successful run, took 17.6 s
+because pip downloaded everything for the first time; build `#5`, which reused
+the workspace venv, took 6.0 s).
 
 ### Illustrative “expected” summary
 
@@ -874,10 +885,10 @@ Generated `BUILD-INFO.txt` (actual, build `#5`):
 
 ```text
 delivery-metrics-exporter deployment package
-Build number : 5
-Git commit   : 0a8b8496e479931d09bc9db8c59d79f48060e506
+Build number : 7
+Git commit   : 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb
 Git branch   : origin/main
-Built at     : 2026-11-20T07:42:35Z
+Built at     : 2026-11-20T07:51:57Z
 ```
 
 Packaging guarantees enforced by the pipeline:
@@ -896,36 +907,36 @@ where the artifact was produced and consumed.
 
 ## 19. Deployment Artifact Structure
 
-Actual `unzip -l deployment-artifact.zip` from build `#6`:
+Actual `unzip -l deployment-artifact.zip` from build `#7`:
 
 ```text
 Archive:  deployment-artifact.zip
   Length      Date    Time    Name
 ---------  ---------- -----   ----
-        0  2026-11-20 13:18   deployment/
-        0  2026-11-20 13:18   deployment/exporter/
-      574  2026-11-20 13:18   deployment/exporter/__init__.py
-     2247  2026-11-20 13:18   deployment/exporter/main.py
-     7866  2026-11-20 13:18   deployment/exporter/metrics.py
-        0  2026-11-20 13:18   deployment/config/
-      206  2026-11-20 13:18   deployment/config/metrics.json
-      343  2026-11-20 13:18   deployment/requirements.txt
-    67812  2026-11-20 13:18   deployment/README.md
-      181  2026-11-20 13:18   deployment/BUILD-INFO.txt
-        0  2026-11-20 13:18   deployment/output/
-      927  2026-11-20 13:18   deployment/output/metrics-report.json
+        0  2026-11-20 13:21   deployment/
+        0  2026-11-20 13:21   deployment/exporter/
+      574  2026-11-20 13:21   deployment/exporter/__init__.py
+     2247  2026-11-20 13:21   deployment/exporter/main.py
+     7866  2026-11-20 13:21   deployment/exporter/metrics.py
+        0  2026-11-20 13:21   deployment/config/
+      206  2026-11-20 13:21   deployment/config/metrics.json
+      343  2026-11-20 13:21   deployment/requirements.txt
+    68693  2026-11-20 13:21   deployment/README.md
+      181  2026-11-20 13:21   deployment/BUILD-INFO.txt
+        0  2026-11-20 13:21   deployment/output/
+      927  2026-11-20 13:21   deployment/output/metrics-report.json
 ---------                     -------
-    80156                     12 files
+    81037                     12 files
 ```
 
-- Archive size: **28,566 bytes** (`28K`), SHA-256
-  `ceba16c668c8cc02aa176eb43e67dc01cbbd68d440bd211378ffb53970e5c370`.
+- Archive size: **28,942 bytes** (`28K`), SHA-256
+  `c719a6579033ad036cb9b116d5c3bf996a306109a91accf1874ff406d8060e9e`.
 - 12 entries: 3 source files, 1 config file, 2 documentation/metadata files,
   1 requirements file, 1 report generated by the packaging smoke test,
   and 4 directory entries.
 - A copy is committed at [`evidence/deployment-artifact.zip`](evidence/deployment-artifact.zip).
 - The ZIP grows as `README.md` grows (the README is deliberately part of the
-  package); the listing above is a snapshot of build `#6`. The earlier build
+  package); the listing above is a snapshot of build `#7`. The earlier build
   `#2` package was 7,578 bytes because its README was only ~1.4 KB.
 
 Inside Jenkins the same files live in:
@@ -936,7 +947,7 @@ Inside Jenkins the same files live in:
 ```
 
 and the archived copy is downloadable from the build page at
-`http://localhost:8080/job/delivery-metrics-exporter/5/artifact/deployment-artifact.zip`.
+`http://localhost:8080/job/delivery-metrics-exporter/7/artifact/deployment-artifact.zip`.
 
 ## 20. How to Run the Deployment Artifact Independently
 
@@ -1147,9 +1158,9 @@ pipeline itself was validated.
    again.
 
 Recovery was demonstrated: build `#4` FAILURE → build `#5` SUCCESS on the same
-commit, with no code change other than the build parameter. Build `#6` later
-re-verified the pipeline after the documentation commit and also finished
-`SUCCESS`.
+commit, with no code change other than the build parameter. Builds `#6` and
+`#7` later re-verified the pipeline after documentation and dependency-handling
+changes and also finished `SUCCESS`.
 
 ## 24. Expected Console Output and Build Statuses
 
@@ -1163,12 +1174,13 @@ re-verified the pipeline after the documentation commit and also finished
 | `#4` | `DEMO_FORCE_TEST_FAILURE=true` | **FAILURE** | 7.2 s | JUnit only | `evidence/build-4-console.txt` |
 | `#5` | `DEMO_FORCE_TEST_FAILURE=false` | **SUCCESS** | 6.0 s | ZIP + JUnit | `evidence/build-5-console.txt` |
 | `#6` | `DEMO_FORCE_TEST_FAILURE=false` | **SUCCESS** | 10.5 s | ZIP + JUnit | `evidence/build-6-console.txt` |
+| `#7` | `DEMO_FORCE_TEST_FAILURE=false` | **SUCCESS** | 13.1 s | ZIP + JUnit | `evidence/build-7-console.txt` |
 
-Build `#6` is the final verification run: it built commit `e6821f4`, the commit
-that contains this README and the captured evidence. Its Stage 1 output reads
-`Branch : origin/main (working tree state: HEAD)` and
+Build `#7` is the final verification run: it built commit `6f0e2fb`, which
+contains the clean-venv pipeline plus this documentation. Its Stage 1 output
+reads `Branch : origin/main (working tree state: HEAD)` and
 `Remote refs : origin/main`, and the checkout log shows
-`Checking out Revision e6821f47ecd40b72ea83776bb7dd8fd11ecd9691`.
+`Checking out Revision 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb`.
 
 ### Status semantics used in this project
 
@@ -1238,15 +1250,15 @@ that contains this README and the captured evidence. Its Stage 1 output reads
 ### Requirement 4 — Execution: dependencies, tests, deployment copy
 
 - [x] Dependencies installed (`Successfully installed ... pytest-8.3.4`, build `#2`)
-- [x] Tests pass (`26 passed`, builds `#2`, `#5` and `#6`)
+- [x] Tests pass (`26 passed`, builds `#2`, `#5`, `#6` and `#7`)
 - [x] `deployment/` created with `exporter/`, `config/`, `requirements.txt`,
       `README.md`, `BUILD-INFO.txt`
-- [x] `deployment-artifact.zip` created (28,566 bytes in build `#6`) and archived
+- [x] `deployment-artifact.zip` created (28,942 bytes in build `#7`) and archived
 - [x] Packaged app executed independently and produced the expected JSON
 
 ### Requirement 5 — Stage logs, controlled failure, FAILURE status
 
-- [x] Stage logs captured for builds `#1`–`#6` in `evidence/`
+- [x] Stage logs captured for builds `#1`–`#7` in `evidence/`
 - [x] Controlled failure via `DEMO_FORCE_TEST_FAILURE=true` (build `#4`)
 - [x] Test stage FAILED, packaging skipped, final status **FAILURE**
 - [x] Recovery via `DEMO_FORCE_TEST_FAILURE=false` (build `#5`, SUCCESS)

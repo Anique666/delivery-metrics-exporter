@@ -1,0 +1,420 @@
+Started by user admin
+Obtained Jenkinsfile from git https://github.com/Anique666/delivery-metrics-exporter.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/delivery-metrics-exporter
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/delivery-metrics-exporter/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Anique666/delivery-metrics-exporter.git # timeout=10
+Fetching upstream changes from https://github.com/Anique666/delivery-metrics-exporter.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/Anique666/delivery-metrics-exporter.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb # timeout=10
+Commit message: "Recreate the virtual environment on every build"
+ > git rev-list --no-walk e6821f47ecd40b72ea83776bb7dd8fd11ecd9691 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] timeout
+[2026-11-20T07:51:50.851Z] Timeout set to expire in 20 min
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Source Checkout)
+[Pipeline] sh
+[2026-11-20T07:51:51.136Z] + set -eu
+[2026-11-20T07:51:51.137Z] + echo ==========================================================
+[2026-11-20T07:51:51.137Z] ==========================================================
+[2026-11-20T07:51:51.137Z] + echo Stage 1: Source Checkout
+[2026-11-20T07:51:51.137Z] Stage 1: Source Checkout
+[2026-11-20T07:51:51.137Z] + echo ==========================================================
+[2026-11-20T07:51:51.137Z] ==========================================================
+[2026-11-20T07:51:51.137Z] + git config --get remote.origin.url
+[2026-11-20T07:51:51.137Z] + echo Repository URL : https://github.com/Anique666/delivery-metrics-exporter.git
+[2026-11-20T07:51:51.137Z] Repository URL : https://github.com/Anique666/delivery-metrics-exporter.git
+[2026-11-20T07:51:51.137Z] + git rev-parse --abbrev-ref HEAD
+[2026-11-20T07:51:51.137Z] + echo Branch         : origin/main (working tree state: HEAD)
+[2026-11-20T07:51:51.137Z] Branch         : origin/main (working tree state: HEAD)
+[2026-11-20T07:51:51.137Z] + git for-each-ref --format=%(refname:short) --points-at HEAD refs/remotes/origin
+[2026-11-20T07:51:51.137Z] + tr 
+[2026-11-20T07:51:51.137Z]   
+[2026-11-20T07:51:51.137Z] + echo Remote refs    : origin/main 
+[2026-11-20T07:51:51.137Z] Remote refs    : origin/main 
+[2026-11-20T07:51:51.137Z] + git rev-parse HEAD
+[2026-11-20T07:51:51.137Z] + echo Commit         : 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb
+[2026-11-20T07:51:51.137Z] Commit         : 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb
+[2026-11-20T07:51:51.137Z] + git rev-parse --short HEAD
+[2026-11-20T07:51:51.137Z] + echo Short commit   : 6f0e2fb
+[2026-11-20T07:51:51.137Z] Short commit   : 6f0e2fb
+[2026-11-20T07:51:51.137Z] + git log -1 --pretty=%s
+[2026-11-20T07:51:51.137Z] + echo Commit message : Recreate the virtual environment on every build
+[2026-11-20T07:51:51.137Z] Commit message : Recreate the virtual environment on every build
+[2026-11-20T07:51:51.137Z] + git log -1 --pretty=%an <%ae>
+[2026-11-20T07:51:51.137Z] + echo Commit author  : Anique666 <anishkasetty@gmail.com>
+[2026-11-20T07:51:51.137Z] Commit author  : Anique666 <anishkasetty@gmail.com>
+[2026-11-20T07:51:51.137Z] + git log -1 --pretty=%ci
+[2026-11-20T07:51:51.137Z] + echo Commit date    : 2026-11-20 13:21:27 +0530
+[2026-11-20T07:51:51.137Z] Commit date    : 2026-11-20 13:21:27 +0530
+[2026-11-20T07:51:51.137Z] + pwd
+[2026-11-20T07:51:51.137Z] + echo Workspace      : /var/jenkins_home/workspace/delivery-metrics-exporter
+[2026-11-20T07:51:51.137Z] Workspace      : /var/jenkins_home/workspace/delivery-metrics-exporter
+[2026-11-20T07:51:51.137Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:51.137Z] ----------------------------------------------------------
+[2026-11-20T07:51:51.137Z] + echo Removing build outputs from previous runs (stale-artifact protection)
+[2026-11-20T07:51:51.137Z] Removing build outputs from previous runs (stale-artifact protection)
+[2026-11-20T07:51:51.137Z] + rm -rf deployment deployment-artifact.zip reports
+[2026-11-20T07:51:51.137Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:51.137Z] ----------------------------------------------------------
+[2026-11-20T07:51:51.137Z] + echo Verifying expected project files:
+[2026-11-20T07:51:51.137Z] Verifying expected project files:
+[2026-11-20T07:51:51.137Z] + [ ! -f Jenkinsfile ]
+[2026-11-20T07:51:51.137Z] + echo   OK  Jenkinsfile
+[2026-11-20T07:51:51.137Z]   OK  Jenkinsfile
+[2026-11-20T07:51:51.137Z] + [ ! -f requirements.txt ]
+[2026-11-20T07:51:51.137Z] + echo   OK  requirements.txt
+[2026-11-20T07:51:51.137Z]   OK  requirements.txt
+[2026-11-20T07:51:51.137Z] + [ ! -f requirements-dev.txt ]
+[2026-11-20T07:51:51.137Z] + echo   OK  requirements-dev.txt
+[2026-11-20T07:51:51.137Z]   OK  requirements-dev.txt
+[2026-11-20T07:51:51.137Z] + [ ! -f exporter/__init__.py ]
+[2026-11-20T07:51:51.137Z] + echo   OK  exporter/__init__.py
+[2026-11-20T07:51:51.137Z]   OK  exporter/__init__.py
+[2026-11-20T07:51:51.137Z] + [ ! -f exporter/metrics.py ]
+[2026-11-20T07:51:51.137Z] + echo   OK  exporter/metrics.py
+[2026-11-20T07:51:51.137Z]   OK  exporter/metrics.py
+[2026-11-20T07:51:51.137Z] + [ ! -f exporter/main.py ]
+[2026-11-20T07:51:51.137Z] + echo   OK  exporter/main.py
+[2026-11-20T07:51:51.137Z]   OK  exporter/main.py
+[2026-11-20T07:51:51.137Z] + [ ! -f config/metrics.json ]
+[2026-11-20T07:51:51.137Z] + echo   OK  config/metrics.json
+[2026-11-20T07:51:51.137Z]   OK  config/metrics.json
+[2026-11-20T07:51:51.137Z] + [ ! -f tests/test_metrics.py ]
+[2026-11-20T07:51:51.137Z] + echo   OK  tests/test_metrics.py
+[2026-11-20T07:51:51.137Z]   OK  tests/test_metrics.py
+[2026-11-20T07:51:51.137Z] + [ ! -f README.md ]
+[2026-11-20T07:51:51.137Z] + echo   OK  README.md
+[2026-11-20T07:51:51.137Z]   OK  README.md
+[2026-11-20T07:51:51.137Z] + echo All expected project files are present.
+[2026-11-20T07:51:51.137Z] All expected project files are present.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Dependency Installation / Build)
+[Pipeline] sh
+[2026-11-20T07:51:51.446Z] + set -eu
+[2026-11-20T07:51:51.446Z] + echo ==========================================================
+[2026-11-20T07:51:51.446Z] ==========================================================
+[2026-11-20T07:51:51.446Z] + echo Stage 2: Dependency Installation / Build
+[2026-11-20T07:51:51.446Z] Stage 2: Dependency Installation / Build
+[2026-11-20T07:51:51.446Z] + echo ==========================================================
+[2026-11-20T07:51:51.446Z] ==========================================================
+[2026-11-20T07:51:51.446Z] + echo Recreating the virtual environment from scratch
+[2026-11-20T07:51:51.446Z] Recreating the virtual environment from scratch
+[2026-11-20T07:51:51.446Z] + rm -rf .venv
+[2026-11-20T07:51:51.446Z] + python3 -m venv .venv
+[2026-11-20T07:51:52.790Z] + . .venv/bin/activate
+[2026-11-20T07:51:52.790Z] + deactivate nondestructive
+[2026-11-20T07:51:52.790Z] + [ -n  ]
+[2026-11-20T07:51:52.790Z] + [ -n  ]
+[2026-11-20T07:51:52.790Z] + hash -r
+[2026-11-20T07:51:52.790Z] + [ -n  ]
+[2026-11-20T07:51:52.790Z] + unset VIRTUAL_ENV
+[2026-11-20T07:51:52.790Z] + unset VIRTUAL_ENV_PROMPT
+[2026-11-20T07:51:52.790Z] + [ ! nondestructive = nondestructive ]
+[2026-11-20T07:51:52.790Z] + uname
+[2026-11-20T07:51:52.790Z] + export VIRTUAL_ENV=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv
+[2026-11-20T07:51:52.790Z] + _OLD_VIRTUAL_PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:51:52.790Z] + PATH=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:51:52.790Z] + export PATH
+[2026-11-20T07:51:52.790Z] + VIRTUAL_ENV_PROMPT=.venv
+[2026-11-20T07:51:52.790Z] + export VIRTUAL_ENV_PROMPT
+[2026-11-20T07:51:52.790Z] + [ -n  ]
+[2026-11-20T07:51:52.790Z] + [ -z  ]
+[2026-11-20T07:51:52.790Z] + _OLD_VIRTUAL_PS1=$ 
+[2026-11-20T07:51:52.790Z] + PS1=(.venv) $ 
+[2026-11-20T07:51:52.790Z] + export PS1
+[2026-11-20T07:51:52.790Z] + hash -r
+[2026-11-20T07:51:52.790Z] + command -v python
+[2026-11-20T07:51:52.790Z] + echo Python executable : /var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin/python
+[2026-11-20T07:51:52.790Z] Python executable : /var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin/python
+[2026-11-20T07:51:52.790Z] + python --version
+[2026-11-20T07:51:52.790Z] Python 3.13.5
+[2026-11-20T07:51:52.790Z] + python -m pip install --upgrade pip
+[2026-11-20T07:51:53.041Z] Requirement already satisfied: pip in ./.venv/lib/python3.13/site-packages (25.1.1)
+[2026-11-20T07:51:53.592Z] Collecting pip
+[2026-11-20T07:51:53.592Z]   Using cached pip-26.3-py3-none-any.whl.metadata (4.6 kB)
+[2026-11-20T07:51:53.592Z] Using cached pip-26.3-py3-none-any.whl (2.0 MB)
+[2026-11-20T07:51:53.592Z] Installing collected packages: pip
+[2026-11-20T07:51:53.592Z]   Attempting uninstall: pip
+[2026-11-20T07:51:53.592Z]     Found existing installation: pip 25.1.1
+[2026-11-20T07:51:53.592Z]     Uninstalling pip-25.1.1:
+[2026-11-20T07:51:53.592Z]       Successfully uninstalled pip-25.1.1
+[2026-11-20T07:51:54.503Z] Successfully installed pip-26.3
+[2026-11-20T07:51:54.503Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:54.503Z] ----------------------------------------------------------
+[2026-11-20T07:51:54.503Z] + echo Installing runtime dependencies (requirements.txt):
+[2026-11-20T07:51:54.503Z] Installing runtime dependencies (requirements.txt):
+[2026-11-20T07:51:54.503Z] + python -m pip install -r requirements.txt
+[2026-11-20T07:51:55.054Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:55.054Z] ----------------------------------------------------------
+[2026-11-20T07:51:55.054Z] + echo Installing test/CI dependencies (requirements-dev.txt):
+[2026-11-20T07:51:55.054Z] Installing test/CI dependencies (requirements-dev.txt):
+[2026-11-20T07:51:55.054Z] + python -m pip install -r requirements-dev.txt
+[2026-11-20T07:51:55.605Z] Collecting pytest==8.3.4 (from -r requirements-dev.txt (line 3))
+[2026-11-20T07:51:55.605Z]   Using cached pytest-8.3.4-py3-none-any.whl.metadata (7.5 kB)
+[2026-11-20T07:51:55.605Z] Collecting iniconfig (from pytest==8.3.4->-r requirements-dev.txt (line 3))
+[2026-11-20T07:51:55.605Z]   Using cached iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+[2026-11-20T07:51:55.855Z] Collecting packaging (from pytest==8.3.4->-r requirements-dev.txt (line 3))
+[2026-11-20T07:51:55.855Z]   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+[2026-11-20T07:51:56.106Z] Collecting pluggy<2,>=1.5 (from pytest==8.3.4->-r requirements-dev.txt (line 3))
+[2026-11-20T07:51:56.106Z]   Using cached pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+[2026-11-20T07:51:56.106Z] Using cached pytest-8.3.4-py3-none-any.whl (343 kB)
+[2026-11-20T07:51:56.106Z] Using cached pluggy-1.7.0-py3-none-any.whl (27 kB)
+[2026-11-20T07:51:56.106Z] Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+[2026-11-20T07:51:56.106Z] Using cached packaging-26.3-py3-none-any.whl (129 kB)
+[2026-11-20T07:51:56.106Z] Installing collected packages: pluggy, packaging, iniconfig, pytest
+[2026-11-20T07:51:56.356Z] 
+[2026-11-20T07:51:56.356Z] Successfully installed iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pytest-8.3.4
+[2026-11-20T07:51:56.356Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:56.356Z] ----------------------------------------------------------
+[2026-11-20T07:51:56.356Z] + echo Installed packages:
+[2026-11-20T07:51:56.356Z] Installed packages:
+[2026-11-20T07:51:56.356Z] + python -m pip list
+[2026-11-20T07:51:56.356Z] Package   Version
+[2026-11-20T07:51:56.356Z] --------- -------
+[2026-11-20T07:51:56.356Z] iniconfig 2.3.1
+[2026-11-20T07:51:56.356Z] packaging 26.3
+[2026-11-20T07:51:56.356Z] pip       26.3
+[2026-11-20T07:51:56.356Z] pluggy    1.7.0
+[2026-11-20T07:51:56.356Z] pytest    8.3.4
+[2026-11-20T07:51:56.356Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:56.356Z] ----------------------------------------------------------
+[2026-11-20T07:51:56.356Z] + echo Build check: byte-compiling the package
+[2026-11-20T07:51:56.356Z] Build check: byte-compiling the package
+[2026-11-20T07:51:56.356Z] + python -m compileall -q exporter tests
+[2026-11-20T07:51:56.606Z] + echo Byte-compilation succeeded.
+[2026-11-20T07:51:56.607Z] Byte-compilation succeeded.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Automated Test / Validation)
+[Pipeline] sh
+[2026-11-20T07:51:56.914Z] + set -eu
+[2026-11-20T07:51:56.914Z] + echo ==========================================================
+[2026-11-20T07:51:56.914Z] ==========================================================
+[2026-11-20T07:51:56.914Z] + echo Stage 3: Automated Test / Validation
+[2026-11-20T07:51:56.914Z] Stage 3: Automated Test / Validation
+[2026-11-20T07:51:56.914Z] + echo ==========================================================
+[2026-11-20T07:51:56.914Z] ==========================================================
+[2026-11-20T07:51:56.914Z] + . .venv/bin/activate
+[2026-11-20T07:51:56.914Z] + deactivate nondestructive
+[2026-11-20T07:51:56.914Z] + [ -n  ]
+[2026-11-20T07:51:56.914Z] + [ -n  ]
+[2026-11-20T07:51:56.914Z] + hash -r
+[2026-11-20T07:51:56.914Z] + [ -n  ]
+[2026-11-20T07:51:56.914Z] + unset VIRTUAL_ENV
+[2026-11-20T07:51:56.914Z] + unset VIRTUAL_ENV_PROMPT
+[2026-11-20T07:51:56.914Z] + [ ! nondestructive = nondestructive ]
+[2026-11-20T07:51:56.914Z] + uname
+[2026-11-20T07:51:56.914Z] + export VIRTUAL_ENV=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv
+[2026-11-20T07:51:56.914Z] + _OLD_VIRTUAL_PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:51:56.914Z] + PATH=/var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin:/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+[2026-11-20T07:51:56.914Z] + export PATH
+[2026-11-20T07:51:56.914Z] + VIRTUAL_ENV_PROMPT=.venv
+[2026-11-20T07:51:56.914Z] + export VIRTUAL_ENV_PROMPT
+[2026-11-20T07:51:56.914Z] + [ -n  ]
+[2026-11-20T07:51:56.914Z] + [ -z  ]
+[2026-11-20T07:51:56.914Z] + _OLD_VIRTUAL_PS1=$ 
+[2026-11-20T07:51:56.914Z] + PS1=(.venv) $ 
+[2026-11-20T07:51:56.914Z] + export PS1
+[2026-11-20T07:51:56.914Z] + hash -r
+[2026-11-20T07:51:56.914Z] + echo DEMO_FORCE_TEST_FAILURE=false
+[2026-11-20T07:51:56.915Z] DEMO_FORCE_TEST_FAILURE=false
+[2026-11-20T07:51:56.915Z] + mkdir -p reports
+[2026-11-20T07:51:56.915Z] + python -m pytest -v tests --junitxml=reports/junit-results.xml
+[2026-11-20T07:51:56.915Z] ============================= test session starts ==============================
+[2026-11-20T07:51:56.915Z] platform linux -- Python 3.13.5, pytest-8.3.4, pluggy-1.7.0 -- /var/jenkins_home/workspace/delivery-metrics-exporter/.venv/bin/python
+[2026-11-20T07:51:56.915Z] cachedir: .pytest_cache
+[2026-11-20T07:51:56.915Z] rootdir: /var/jenkins_home/workspace/delivery-metrics-exporter
+[2026-11-20T07:51:56.915Z] collecting ... collected 26 items
+[2026-11-20T07:51:56.915Z] 
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestConfiguration::test_config_without_metrics_section_raises PASSED [  3%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestConfiguration::test_invalid_json_raises_metric_error PASSED [  7%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestConfiguration::test_missing_config_file_raises_metric_error PASSED [ 11%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestConfiguration::test_shipped_config_file_loads PASSED [ 15%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_missing_metric_is_reported PASSED [ 19%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_nan_is_rejected PASSED [ 23%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_negative_value_is_rejected PASSED [ 26%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_non_mapping_metrics_are_rejected PASSED [ 30%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_non_numeric_values_are_rejected PASSED [ 34%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_percentage_above_100_is_rejected PASSED [ 38%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_unknown_metric_is_rejected PASSED [ 42%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_unknown_metric_is_reported PASSED [ 46%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_valid_metric_returns_float PASSED [ 50%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestMetricValidation::test_validate_metrics_returns_all_required_keys PASSED [ 53%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestReportGeneration::test_invalid_metric_value_prevents_report PASSED [ 57%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestReportGeneration::test_invalid_window_days_is_rejected PASSED [ 61%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestReportGeneration::test_report_is_deterministic_for_fixed_timestamp PASSED [ 65%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestReportGeneration::test_report_structure_is_predictable PASSED [ 69%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestReportGeneration::test_report_values_match_input PASSED [ 73%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestJsonSerialisation::test_json_is_pretty_printed PASSED [ 76%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestJsonSerialisation::test_json_round_trip PASSED [ 80%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestJsonSerialisation::test_write_report_creates_directory_and_file PASSED [ 84%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestJsonSerialisation::test_write_report_rejects_non_json_filename PASSED [ 88%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestCommandLine::test_cli_generates_report PASSED [ 92%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestCommandLine::test_cli_returns_1_on_bad_config PASSED [ 96%]
+[2026-11-20T07:51:56.915Z] tests/test_metrics.py::TestControlledFailureDemo::test_controlled_failure_flag_is_respected PASSED [100%]
+[2026-11-20T07:51:56.915Z] 
+[2026-11-20T07:51:56.915Z] - generated xml file: /var/jenkins_home/workspace/delivery-metrics-exporter/reports/junit-results.xml -
+[2026-11-20T07:51:56.915Z] ============================== 26 passed in 0.04s ==============================
+[2026-11-20T07:51:56.915Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:56.915Z] ----------------------------------------------------------
+[2026-11-20T07:51:56.915Z] + echo Test suite finished with exit code 0 (all tests passed).
+[2026-11-20T07:51:56.915Z] Test suite finished with exit code 0 (all tests passed).
+Post stage
+[Pipeline] junit
+[2026-11-20T07:51:56.931Z] Recording test results
+[2026-11-20T07:51:56.936Z] [Checks API] No suitable checks publisher found.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deployment Packaging)
+[Pipeline] sh
+[2026-11-20T07:51:57.250Z] + set -eu
+[2026-11-20T07:51:57.250Z] + echo ==========================================================
+[2026-11-20T07:51:57.250Z] ==========================================================
+[2026-11-20T07:51:57.250Z] + echo Stage 4: Deployment Packaging
+[2026-11-20T07:51:57.250Z] Stage 4: Deployment Packaging
+[2026-11-20T07:51:57.250Z] + echo ==========================================================
+[2026-11-20T07:51:57.250Z] ==========================================================
+[2026-11-20T07:51:57.250Z] + rm -rf deployment deployment-artifact.zip
+[2026-11-20T07:51:57.250Z] + mkdir -p deployment
+[2026-11-20T07:51:57.250Z] + echo Copying runtime files into deployment/
+[2026-11-20T07:51:57.250Z] Copying runtime files into deployment/
+[2026-11-20T07:51:57.250Z] + cp -R exporter deployment/
+[2026-11-20T07:51:57.250Z] + cp -R config deployment/
+[2026-11-20T07:51:57.250Z] + cp requirements.txt README.md deployment/
+[2026-11-20T07:51:57.250Z] + echo Removing caches, byte-code and test-only files from the package
+[2026-11-20T07:51:57.250Z] Removing caches, byte-code and test-only files from the package
+[2026-11-20T07:51:57.250Z] + find deployment -name __pycache__ -type d -prune -exec rm -rf {} +
+[2026-11-20T07:51:57.250Z] + find deployment -name *.pyc -delete
+[2026-11-20T07:51:57.250Z] + rm -rf deployment/tests deployment/.venv deployment/reports
+[2026-11-20T07:51:57.250Z] + [ -e deployment/tests ]
+[2026-11-20T07:51:57.250Z] + [ -e deployment/.venv ]
+[2026-11-20T07:51:57.250Z] + find deployment -name __pycache__
+[2026-11-20T07:51:57.250Z] + grep -q .
+[2026-11-20T07:51:57.250Z] + echo delivery-metrics-exporter deployment package
+[2026-11-20T07:51:57.250Z] + echo Build number : 7
+[2026-11-20T07:51:57.250Z] + echo Git commit   : 6f0e2fb80db94f44e0d8d9715cdd866f65b7d3cb
+[2026-11-20T07:51:57.250Z] + echo Git branch   : origin/main
+[2026-11-20T07:51:57.250Z] + date -u +%Y-%m-%dT%H:%M:%SZ
+[2026-11-20T07:51:57.250Z] + echo Built at     : 2026-11-20T07:51:57Z
+[2026-11-20T07:51:57.250Z] + echo Verifying required deployment files:
+[2026-11-20T07:51:57.250Z] Verifying required deployment files:
+[2026-11-20T07:51:57.250Z] + [ ! -f deployment/exporter/__init__.py ]
+[2026-11-20T07:51:57.250Z] + echo   OK  deployment/exporter/__init__.py
+[2026-11-20T07:51:57.250Z]   OK  deployment/exporter/__init__.py
+[2026-11-20T07:51:57.250Z] + [ ! -f deployment/exporter/metrics.py ]
+[2026-11-20T07:51:57.250Z] + echo   OK  deployment/exporter/metrics.py
+[2026-11-20T07:51:57.250Z]   OK  deployment/exporter/metrics.py
+[2026-11-20T07:51:57.250Z] + [ ! -f deployment/exporter/main.py ]
+[2026-11-20T07:51:57.250Z] + echo   OK  deployment/exporter/main.py
+[2026-11-20T07:51:57.250Z]   OK  deployment/exporter/main.py
+[2026-11-20T07:51:57.250Z] + [ ! -f deployment/config/metrics.json ]
+[2026-11-20T07:51:57.250Z] + echo   OK  deployment/config/metrics.json
+[2026-11-20T07:51:57.250Z]   OK  deployment/config/metrics.json
+[2026-11-20T07:51:57.250Z] + [ ! -f deployment/requirements.txt ]
+[2026-11-20T07:51:57.250Z] + echo   OK  deployment/requirements.txt
+[2026-11-20T07:51:57.250Z]   OK  deployment/requirements.txt
+[2026-11-20T07:51:57.250Z] + [ ! -f deployment/README.md ]
+[2026-11-20T07:51:57.250Z] + echo   OK  deployment/README.md
+[2026-11-20T07:51:57.250Z]   OK  deployment/README.md
+[2026-11-20T07:51:57.250Z] + [ ! -f deployment/BUILD-INFO.txt ]
+[2026-11-20T07:51:57.250Z] + echo   OK  deployment/BUILD-INFO.txt
+[2026-11-20T07:51:57.250Z]   OK  deployment/BUILD-INFO.txt
+[2026-11-20T07:51:57.250Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:57.250Z] ----------------------------------------------------------
+[2026-11-20T07:51:57.250Z] + echo Smoke test: running the packaged exporter with the system python3
+[2026-11-20T07:51:57.250Z] Smoke test: running the packaged exporter with the system python3
+[2026-11-20T07:51:57.250Z] + cd deployment
+[2026-11-20T07:51:57.250Z] + PYTHONDONTWRITEBYTECODE=1 python3 -m exporter.main --output-dir output
+[2026-11-20T07:51:57.250Z] Service      : checkout-api
+[2026-11-20T07:51:57.250Z] Window (days): 30
+[2026-11-20T07:51:57.250Z] Metrics      : 4
+[2026-11-20T07:51:57.250Z] Report       : /var/jenkins_home/workspace/delivery-metrics-exporter/deployment/output/metrics-report.json
+[2026-11-20T07:51:57.251Z] + test -f deployment/output/metrics-report.json
+[2026-11-20T07:51:57.251Z] + python3 -c import json, pathlib; r = json.loads(pathlib.Path("deployment/output/metrics-report.json").read_text()); assert r["metric_count"] == 4, r; assert r["service"] == "checkout-api", r; print("Packaged report validated: service=%s metrics=%s" % (r["service"], r["metric_count"]))
+[2026-11-20T07:51:57.251Z] Packaged report validated: service=checkout-api metrics=4
+[2026-11-20T07:51:57.251Z] + echo ----------------------------------------------------------
+[2026-11-20T07:51:57.251Z] ----------------------------------------------------------
+[2026-11-20T07:51:57.251Z] + echo Removing any byte-code generated by the smoke test
+[2026-11-20T07:51:57.251Z] Removing any byte-code generated by the smoke test
+[2026-11-20T07:51:57.251Z] + find deployment -name __pycache__ -type d -prune -exec rm -rf {} +
+[2026-11-20T07:51:57.251Z] + find deployment -name *.pyc -delete
+[2026-11-20T07:51:57.251Z] + echo Creating ZIP archive: deployment-artifact.zip
+[2026-11-20T07:51:57.251Z] Creating ZIP archive: deployment-artifact.zip
+[2026-11-20T07:51:57.251Z] + zip -qr deployment-artifact.zip deployment
+[2026-11-20T07:51:57.251Z] + unzip -l deployment-artifact.zip
+[2026-11-20T07:51:57.251Z] Archive:  deployment-artifact.zip
+[2026-11-20T07:51:57.251Z]   Length      Date    Time    Name
+[2026-11-20T07:51:57.251Z] ---------  ---------- -----   ----
+[2026-11-20T07:51:57.251Z]         0  2026-11-20 07:51   deployment/
+[2026-11-20T07:51:57.251Z]         0  2026-11-20 07:51   deployment/exporter/
+[2026-11-20T07:51:57.251Z]       574  2026-11-20 07:51   deployment/exporter/__init__.py
+[2026-11-20T07:51:57.251Z]      2247  2026-11-20 07:51   deployment/exporter/main.py
+[2026-11-20T07:51:57.251Z]      7866  2026-11-20 07:51   deployment/exporter/metrics.py
+[2026-11-20T07:51:57.251Z]         0  2026-11-20 07:51   deployment/config/
+[2026-11-20T07:51:57.251Z]       206  2026-11-20 07:51   deployment/config/metrics.json
+[2026-11-20T07:51:57.251Z]       343  2026-11-20 07:51   deployment/requirements.txt
+[2026-11-20T07:51:57.251Z]     68693  2026-11-20 07:51   deployment/README.md
+[2026-11-20T07:51:57.251Z]       181  2026-11-20 07:51   deployment/BUILD-INFO.txt
+[2026-11-20T07:51:57.251Z]         0  2026-11-20 07:51   deployment/output/
+[2026-11-20T07:51:57.251Z]       927  2026-11-20 07:51   deployment/output/metrics-report.json
+[2026-11-20T07:51:57.251Z] ---------                     -------
+[2026-11-20T07:51:57.251Z]     81037                     12 files
+[2026-11-20T07:51:57.251Z] + unzip -Z1 deployment-artifact.zip
+[2026-11-20T07:51:57.251Z] + grep -Eq (__pycache__|[.]venv/|/tests/|[.]pytest_cache)
+[2026-11-20T07:51:57.251Z] + ls -lh deployment-artifact.zip
+[2026-11-20T07:51:57.251Z] -rw-r--r--. 1 jenkins jenkins 29K Nov 20 07:51 deployment-artifact.zip
+[2026-11-20T07:51:57.251Z] + echo Deployment packaging complete.
+[2026-11-20T07:51:57.251Z] Deployment packaging complete.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+[2026-11-20T07:51:57.296Z] Final build status: SUCCESS (build #7)
+[Pipeline] archiveArtifacts
+[2026-11-20T07:51:57.302Z] Archiving artifacts
+[2026-11-20T07:51:57.303Z] Recording fingerprints
+[Pipeline] echo
+[2026-11-20T07:51:57.317Z] BUILD SUCCESS: all four stages passed. The exporter was validated and deployment-artifact.zip was produced.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
